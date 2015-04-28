@@ -1,0 +1,26 @@
+{
+  "name": "scratcher",
+  "version": "1.0.0",
+  "description": "a scratcher demo",
+  "main": "scratcher.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "gulp": "^3.8.11",
+    "gulp-uglify": "^1.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mirreal/scratcher"
+  },
+  "keywords": [
+    "scratcher"
+  ],
+  "author": "mirreal",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mirreal/scratcher/issues"
+  },
+  "homepage": "https://github.com/mirreal/scratcher"
+}

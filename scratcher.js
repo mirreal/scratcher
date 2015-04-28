@@ -7,15 +7,27 @@ function Scratcher() {
 
   this.last = {};
 
-  this.layer();
-  this.listen();
+  this.init();
 }
 
-Scratcher.prototype.layer = function() {
+Scratcher.prototype.init = function() {
+  this.width = 300;
+  this.height = 200;
+
+  this.layer(this.width, this.height);
+  this.info();
+  this.listen();
+};
+
+Scratcher.prototype.info = function() {
+  document.querySelector('.g-info').innerHTML = 'Can U see me?';
+};
+
+Scratcher.prototype.layer = function(width, height) {
   var ctx = this.context;
 
   ctx.fillStyle = 'orange';
-  ctx.fillRect(0, 0, 300, 150);
+  ctx.fillRect(0, 0, width, height);
 
   ctx.globalCompositeOperation = 'destination-out';
 };
@@ -26,10 +38,11 @@ Scratcher.prototype.listen = function() {
   var touchdown = false;
   var sessionId = 0;
 
-  var canvas = this.canvas;
+  var canvas = this.canvas,
+      ctx = this.context;
 
   var color = 'blue',
-      size = 24;
+      size = 48;
 
   /*
   canvas.onmouseup = function(e) {
@@ -63,6 +76,18 @@ Scratcher.prototype.listen = function() {
   canvas.addEventListener('touchend', function(e) {
     e.preventDefault();
     touchdown = false;
+
+    var width = self.width,
+        height = self.height;
+    var data = ctx.getImageData(0, 0, width, height).data;
+
+    for (var i = 0, j = 0; i < data.length; i += 4) {
+      if (!(data[i] || data[i+1] || data[i+2] || data[i+3])) {
+        j++;
+      }
+    }
+
+    (j >= width * height * 0.8) && (alert('well done'));
   });
 
   canvas.addEventListener('touchmove', function(e) {
